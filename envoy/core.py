@@ -54,8 +54,11 @@ class Command(object):
 
     def run(self, data, timeout, kill_timeout, env, cwd):
         self.data = data
-        environ = dict(os.environ)
-        environ.update(env or {})
+
+        if env is None:
+            environ = dict(os.environ)
+        else:
+            environ = dict(env)
 
         def target():
 
